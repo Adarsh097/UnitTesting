@@ -25,8 +25,8 @@ app.post("/sum", async(req:any,res:any) => {
         
         const result = await prismaClient.sum.create({
             data: {
-                a:paresedResponse.data.b,
-                b:paresedResponse.data.a,
+                a:paresedResponse.data.a,
+                b:paresedResponse.data.b,
                 result:answer
             }
         })
