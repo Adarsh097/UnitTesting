@@ -18,10 +18,19 @@ jobs:
         with:
           node-version: 20
 
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Update working directory to correct path
       - name: Install dependencies
-        working-directory: Spying
+        working-directory: ./TESTING/Spying
         run: npm install && npx prisma generate
 
       - name: Run tests
-        working-directory: Spying
+        working-directory: ./TESTING/Spying
         run: npm run test
